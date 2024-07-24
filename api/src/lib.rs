@@ -19,16 +19,20 @@ async fn start() -> anyhow::Result<()> {
     let port = env::var("PORT").expect("PORT is not set");
     let server_addr = format!("{}:{}", host, port);
 
-    let conn = Database::connect(&db_url).await.expect("Could not connect to database");
+    let conn = Database::connect(&db_url)
+        .await
+        .expect("Could not connect to database");
 
     let state = AppState { conn };
 
-    let test_routes = Router::new().nest("/test", init_test_routes());
+    let test_routes = init_test_routes();
     let api_routes = Router::new().merge(test_routes);
 
     let app = Router::new().nest("/v1", api_routes).with_state(state);
 
-    let listener = tokio::net::TcpListener::bind(&server_addr).await.expect("Could not bind to address");
+    let listener = tokio::net::TcpListener::bind(&server_addr)
+        .await
+        .expect("Could not bind to address");
 
     tracing::debug!("Listening on: {}", listener.local_addr().unwrap());
 

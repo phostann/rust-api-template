@@ -8,3 +8,4 @@ members = [".", "api", "entity", "service"]
 
 [dependencies]
 api = { path = "api" }
+openssl = { version = "0.10.66", features = ["vendored"] }
