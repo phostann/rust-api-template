@@ -1,0 +1,10 @@
+[package]
+name = "atom"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+members = [".", "api", "entity", "service"]
+
+[dependencies]
+api = { path = "api" }

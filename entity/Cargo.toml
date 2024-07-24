@@ -1,0 +1,10 @@
+[package]
+name = "entity"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+async-trait = "0.1.80"
+chrono = "0.4.38"
+sea-orm = { version = "0.12.15", features = ['with-chrono'] }
+serde = { version = "1.0.203", features = ["derive"] }
